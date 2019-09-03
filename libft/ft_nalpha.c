@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_nalpha.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/05 12:41:07 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/08/07 08:30:45 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/06/05 14:05:44 by ksefeane          #+#    #+#             */
+/*   Updated: 2019/06/05 15:45:22 by ksefeane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
+int		*ft_nalpha(char const *s, char c)
+{
+	int	*n;
+	int	i;
+	int	j;
+	int	a;
 
-# define BUFF_SIZE 4
-
-int	get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	j = 0;
+	a = 0;
+	if (!(n = (int *)malloc(sizeof(int) * ft_nwords(s, c))))
+		return (0);
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		while (s[i + j] != c && s[i + j] != '\0')
+			j++;
+		n[a] = j;
+		i += j;
+		j = 0;
+		a++;
+	}
+	return (n);
+}

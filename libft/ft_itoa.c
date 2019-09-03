@@ -1,22 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/05 12:41:07 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/08/07 08:30:45 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/05/28 14:51:44 by ksefeane          #+#    #+#             */
+/*   Updated: 2019/06/09 16:38:12 by ksefeane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
+char	*ft_itoa(int n)
+{
+	char	*a;
+	int		i;
+	long	x;
+	long	y;
 
-# define BUFF_SIZE 4
-
-int	get_next_line(const int fd, char **line);
-
-#endif
+	i = 1;
+	x = (long)n;
+	y = (long)n;
+	x *= (y < 0) ? -1 : 1;
+	while (x > 9)
+	{
+		i++;
+		x /= 10;
+	}
+	if (!(a = (y < 0) ? ft_strnew(++i) : ft_strnew(i)))
+		return (0);
+	x = (y < 0) ? 0 : -1;
+	(y < 0) ? a[0] = '-' : 0;
+	y *= (y < 0) ? -1 : 1;
+	while (--i > x)
+	{
+		a[i] = (y % 10) + 48;
+		y /= 10;
+	}
+	return (a);
+}

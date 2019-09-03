@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_space.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/05 12:41:07 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/08/07 08:30:45 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/06/18 10:17:54 by ksefeane          #+#    #+#             */
+/*   Updated: 2019/06/18 10:20:21 by ksefeane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
+static int	ft_gaps(char c)
+{
+	return (c == ' ' || c == '\n' || c == '\t');
+}
 
-# define BUFF_SIZE 4
+int			ft_space(const char *s, int n)
+{
+	int	i;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	if (n == 1)
+		while (s[i] && ft_gaps(s[i]))
+			i++;
+	if (n == 2)
+	{
+		i = ft_strlen(s);
+		while (ft_gaps(s[i - 1]))
+			i--;
+		i -= ft_space(s, 1);
+	}
+	return (i);
+}
