@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/05 12:41:07 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/08/07 08:30:45 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/09/15 13:40:48 by ksefeane          #+#    #+#             */
+/*   Updated: 2019/09/15 14:09:58 by ksefeane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../inc/lemin.h"
 
-# include "libft.h"
+int		main(void)
+{
+	t_lnk	*a;
+	t_lnk	*b;
 
-# define BUFF_SIZE 4
-
-int	get_next_line(const int fd, char **line);
-
-#endif
+	a = ft_lnknew("tom");
+	b = ft_lnknew("jane");
+	ft_putendl(a->con);
+	ft_lnkaddl(&a, b);
+	ft_putendl(a->next->con);
+	return (0);
+}
