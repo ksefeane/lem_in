@@ -3,40 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 14:51:44 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/06/09 16:38:12 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/06/27 16:33:08 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/27 17:06:21 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+static int		level(unsigned int nb)
 {
-	char	*a;
-	int		i;
-	long	x;
-	long	y;
+	unsigned int	count;
 
-	i = 1;
-	x = (long)n;
-	y = (long)n;
-	x *= (y < 0) ? -1 : 1;
-	while (x > 9)
+	count = 0;
+	while (nb >= 10)
 	{
-		i++;
-		x /= 10;
+		nb = nb / 10;
+		count++;
 	}
-	if (!(a = (y < 0) ? ft_strnew(++i) : ft_strnew(i)))
+	return (count + 1);
+}
+
+char			*ft_itoa(int n)
+{
+	char			*ans;
+	unsigned int	nbr;
+	unsigned int	count;
+	unsigned int	len;
+
+	if (n < 0)
+		nbr = (unsigned int)(-1 * n);
+	else
+		nbr = (unsigned int)n;
+	len = (unsigned int)level(nbr);
+	if (!(ans = (char*)malloc(sizeof(char) * (len + 1 + (n < 0 ? 1 : 0)))))
 		return (0);
-	x = (y < 0) ? 0 : -1;
-	(y < 0) ? a[0] = '-' : 0;
-	y *= (y < 0) ? -1 : 1;
-	while (--i > x)
+	if (n < 0 && (ans[0] = '-'))
+		len++;
+	count = len - 1;
+	while (nbr >= 10)
 	{
-		a[i] = (y % 10) + 48;
-		y /= 10;
+		ans[count--] = (char)(nbr % 10 + 48);
+		nbr = nbr / 10;
 	}
-	return (a);
+	ans[count] = (char)(nbr % 10 + 48);
+	ans[len] = '\0';
+	return (ans);
 }

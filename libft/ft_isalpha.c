@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 11:55:21 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/05/20 12:44:41 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/05/21 11:15:44 by omputle           #+#    #+#             */
+/*   Updated: 2019/05/24 10:40:15 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_isalpha(int c)
 {
-	if (ft_isval(c, 'a', 'z') == 1 || ft_isval(c, 'A', 'Z') == 1)
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
 	else
 		return (0);

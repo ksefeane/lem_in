@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nwords.c                                        :+:      :+:    :+:   */
+/*   ab_value.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 10:39:42 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/06/05 18:09:15 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/09/04 11:52:43 by omputle           #+#    #+#             */
+/*   Updated: 2019/09/04 11:54:20 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nwords(char const *s, char c)
+int		ab_value(int num)
 {
-	int		n;
-	size_t	i;
-
-	i = 0;
-	n = 0;
-	while (s[n])
-	{
-		if (s[n] != c && (s[n + 1] == c || s[n + 1] == '\0'))
-			i++;
-		n++;
-	}
-	return (i);
+	if (num < 0)
+		return (num * -1);
+	else
+		return (num);
 }

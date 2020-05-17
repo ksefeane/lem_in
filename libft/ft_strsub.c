@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 15:41:27 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/07/17 18:10:45 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/06/11 11:17:55 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/19 09:42:22 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,29 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*f;
-	size_t	i;
+	unsigned int	count;
+	size_t			size;
+	char			*str;
+	char			*copy;
 
-	if (!(f = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = 0;
-	while (s[start] && i < len)
+	count = 0;
+	copy = (char*)s;
+	size = len + (size_t)start;
+	if (!s)
+		return (0);
+	if (size > ft_strlen(copy))
+		return (0);
+	else
 	{
-		f[i] = s[start];
-		i++;
-		start++;
+		if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+			return (0);
+		while (count < len)
+		{
+			str[count] = (char)copy[start];
+			start++;
+			count++;
+		}
+		str[count] = '\0';
 	}
-	f[i] = '\0';
-	return (f);
+	return (str);
 }

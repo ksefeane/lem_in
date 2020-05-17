@@ -3,25 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 16:23:49 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/06/18 10:21:24 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/06/05 09:01:53 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/19 09:44:42 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strtrim(const char *s)
+char	*ft_strtrim(char const *s)
 {
-	int	i;
-	int j;
+	size_t	start;
+	size_t	end;
+	size_t	count;
+	char	*str;
 
-	if (s == 0)
+	start = 0;
+	count = 0;
+	if (!s)
 		return (0);
-	i = ft_space(s, 1);
-	j = ft_space(s, 2);
-	if (i == (int)ft_strlen(s) || (i == 0 && j == 0))
-		return ((char *)&s[i]);
-	return ((char *)ft_strsub(s, i, j));
+	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+		start++;
+	if (s[start] == '\0')
+		return ("");
+	end = ft_strlen(s) - 1;
+	while (s[end] == ' ' || s[end] == '\n' || s[end] == '\t')
+		end--;
+	if (!(str = (char *)malloc(sizeof(char) * (end - start + 2))))
+		return (0);
+	while ((start + count) <= end)
+	{
+		str[count] = s[start + count];
+		count++;
+	}
+	str[count] = '\0';
+	return (str);
 }

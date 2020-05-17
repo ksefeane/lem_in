@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 12:26:36 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/05/20 12:31:57 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/05/20 14:11:14 by omputle           #+#    #+#             */
+/*   Updated: 2019/05/24 10:49:26 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int		ft_toupper(int c)
 {
-	if (ft_isval(c, 'a', 'z'))
-		return (c - 32);
-	return (c);
+	int		letter;
+
+	if (c >= 'a' && c <= 'z')
+	{
+		letter = c - 32;
+	}
+	else
+	{
+		letter = c;
+	}
+	return (letter);
 }

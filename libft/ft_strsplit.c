@@ -3,40 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksefeane <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 12:47:06 by ksefeane          #+#    #+#             */
-/*   Updated: 2019/06/05 18:02:39 by ksefeane         ###   ########.fr       */
+/*   Created: 2019/06/13 10:40:06 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/27 14:51:57 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_strsplit(char const *s, char c)
+static	size_t	word_count(const char *str, char c)
 {
-	char	**w;
-	int		i;
-	int		a;
-	int		*j;
+	size_t	count;
+	size_t	ans;
+
+	ans = 0;
+	count = 0;
+	while (str[count] != '\0')
+	{
+		while (str[count] == c && str[count] != '\0')
+			count++;
+		if (str[count] != c && str[count] != '\0')
+		{
+			ans++;
+			while (str[count] != c && str[count] != '\0')
+				count++;
+		}
+	}
+	return (ans);
+}
+
+static	size_t	letter_count(const char *s, char c)
+{
+	size_t	count;
+
+	count = 0;
+	while (s[count] != '\0' && s[count] != c)
+		count++;
+	return (count);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**str;
+	size_t	words;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	a = 0;
-	if (s == NULL || c == 0)
-		return (NULL);
-	if (!(w = (char **)malloc(sizeof(char *) * (ft_nwords(s, c) + 1))))
-		return (NULL);
-	if (!(j = ft_nalpha(s, c)))
-		return (NULL);
-	while (s[i])
+	j = 0;
+	if (!s)
+		return (0);
+	words = word_count((char *)s, c);
+	if (!(str = (char **)malloc(sizeof(char *) * (words + 1))))
+		return (0);
+	while (s[i] != '\0')
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		if (s[i] != '\0' && s[i] != c)
 		{
-			w[a] = ft_strsub(s, i + 1 - j[a], j[a]);
-			a++;
+			str[j] = ft_strsub(s, i, letter_count((char*)&s[i], c));
+			j++;
+			i = i + letter_count((char*)&s[i], c);
 		}
-		i++;
+		while (s[i] == c && s[i] != '\0')
+			i++;
 	}
-	ft_memdel((void**)&j);
-	w[a] = NULL;
-	return (w);
+	str[j] = NULL;
+	return (str);
 }
